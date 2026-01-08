@@ -68,8 +68,6 @@ We are interested in how you:
 - Improve usability where you believe it provides value
 - Leave areas untouched if you believe they don’t warrant change
 
-Avoid full rewrites.
-
 ---
 
 ## Notes & Reasoning
@@ -104,15 +102,18 @@ If you choose to spend more or less time, please mention it in your notes.
 
 ## Submission
 
-- Share a Git repository
+> ⚠️ This repository is **read-only**.
+
+- Fork this repo or create a new one
 - Ensure the project runs locally
 - Include your notes
+- Share your repository link
 
 ---
 
 ## Final Note
 
-This exercise reflects how we work day-to-day: improving existing code through small, thoughtful changes.
+This exercise reflects how we work day-to-day: improving existing code through thoughtful changes.
 
 We value judgment and clarity over the amount of code changed.
 
