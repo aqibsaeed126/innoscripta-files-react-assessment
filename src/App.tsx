@@ -1,27 +1,10 @@
-import { createTheme, MantineProvider } from "@mantine/core";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { DefaultLayout } from "./layouts";
-import { Favorites, Homepage } from "./pages";
+import { RouterProvider } from "react-router-dom";
 
 import "@mantine/core/styles.css";
-
-const theme = createTheme({});
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <DefaultLayout />,
-    children: [
-      { index: true, element: <Homepage /> },
-      { path: "favorites", element: <Favorites /> },
-    ],
-  },
-]);
+import { routes } from "./utils/routes";
 
 export const App = () => {
-  return (
-    <MantineProvider theme={theme}>
-      <RouterProvider router={router} />
-    </MantineProvider>
-  );
+  // This will trigger the Global ErrorBoundary for issues outside Router and 3rd party libraries
+  // throw new Error("Global App Crash!");
+  return <RouterProvider router={routes} />;
 };

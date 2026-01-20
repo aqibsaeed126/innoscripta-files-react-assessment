@@ -1,41 +1,41 @@
+import { useState, type FC } from "react";
+
 import { Paper, Stack, Tabs } from "@mantine/core";
-import { useEffect, useState, type FC } from "react";
+
 import { FolderNavigation } from "./FolderNavigation";
+import type { ActionOption, UIViewProps } from "~/utils/types";
+import { useData } from "~/contexts/DataContext";
 
-type Item = {
-  id: number;
-  name: string;
-  type: string;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export const Folder = (props: {
-  data: Array<Item>;
+interface FolderProps {
   navTitle: string;
-  gridView: FC<any>;
-  tableView: FC<any>;
-  options?: Array<{ label: string; onClick: Function }>;
-}) => {
-  const [data, setData] = useState<any>();
-  const [activeTab, setActiveTab] = useState("grid");
+  gridView: FC<UIViewProps>;
+  tableView: FC<UIViewProps>;
+  options?: ActionOption[];
+}
 
-  useEffect(() => {
-    setData(props.data);
-  }, [props]);
+export const Folder: React.FC<FolderProps> = ({ navTitle, gridView, tableView, options }) => {
+  const [activeTab, setActiveTab] = useState<"grid" | "table">("grid");
+
+  const { favorites, items } = useData();
+  // Can be a Flag Field
+  const finalData = navTitle === "Favorites" ? favorites : items;
 
   let ViewComponent: any;
   if (activeTab === "grid") {
-    ViewComponent = props.gridView;
+    ViewComponent = gridView;
   } else {
-    ViewComponent = props.tableView;
+    ViewComponent = tableView;
   }
 
   return (
     <Paper p="md" style={{ margin: 20 }}>
-      <FolderNavigation title={props.navTitle} />
+      <FolderNavigation title={navTitle} />
 
-      <Tabs value={activeTab} onChange={(val) => setActiveTab(val as any)} style={{ marginTop: 20, marginBottom: 20 }}>
+      <Tabs
+        value={activeTab}
+        onChange={(val) => setActiveTab(val as any)}
+        style={{ marginTop: 20, marginBottom: 20 }}
+      >
         <Tabs.List>
           <Tabs.Tab value="grid">Grid View</Tabs.Tab>
           <Tabs.Tab value="table">Table View</Tabs.Tab>
@@ -43,7 +43,7 @@ export const Folder = (props: {
       </Tabs>
 
       <Stack>
-        <ViewComponent items={data} options={props.options} />
+        <ViewComponent items={finalData} options={options} />
       </Stack>
     </Paper>
   );
