@@ -58,3 +58,6 @@ If this project were to scale further in a production environment, I would recom
 * * **Linting:** ES Linting to standardize the codebase with common set of rules.
 
 ---
+
+<img width="1892" height="529" alt="image" src="https://github.com/user-attachments/assets/e64b9f62-165e-4841-93c5-aae4065eaad0" />
+
